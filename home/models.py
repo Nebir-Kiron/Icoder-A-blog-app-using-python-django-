@@ -8,3 +8,8 @@ class Contact(models.Model):
     email = models.CharField(max_length=13)
     content = models.TextField()
     time = models.DateTimeField(auto_now_add=True,blank=True)
+    
+
+    def __str__(self):
+        return f'{self.serial_no} : {self.name}'
+    
