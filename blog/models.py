@@ -9,11 +9,13 @@ class Post(models.Model):
     author = models.CharField(max_length=25)
     slug = models.CharField(max_length=120)
     content = models.TextField()
+    views = models.IntegerField(default=0)
     time = models.DateTimeField(blank=True)
     
 
     def __str__(self):
         return f'{self.title} by {self.author}'
+
 
 class BlogComment(models.Model):
     si_no = models.AutoField(primary_key=True)

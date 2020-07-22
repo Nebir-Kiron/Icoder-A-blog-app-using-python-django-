@@ -13,6 +13,8 @@ def blogHome(request):
 
 def blogPost(request ,slug):
     post = Post.objects.filter(slug=slug)[0]
+    post.views = post.views + 1
+    post.save()
     comments = BlogComment.objects.filter(post=post,parent=None)
     replies = BlogComment.objects.filter(post=post).exclude(parent=None)
     replydict = {}
@@ -21,7 +23,7 @@ def blogPost(request ,slug):
             replydict[reply.parent.si_no] = [reply]
         else:
             replydict[reply.parent.si_no].append(reply)
-    print(replydict)
+    
     contex = {
         'post':post,
         'comments':comments,

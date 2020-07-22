@@ -1,20 +1,36 @@
 {% extends 'base.html' %}
 {% block title %}blog{% endblock title %}
+
+{% block js %}
+<script>
+let previews = document.getElementsByClassName('preview')
+Array.from(previews).forEach((element)=>{
+element.innerHTML = element.innerText;  
+})
+
+</script>
+{% endblock js %}
+
 {% block blogactive %}active{% endblock blogactive %}
 {% block body %}
 <div class="container my-2">
   <h2 class="text-success">Coding articles : iCodeR</h2>
   
-  {% for post in allpost %}
+<div class="row">
+ {% for post in allpost %}
+
   <div class="col-md-6">
+  
     <div class="card flex-md-row mb-4 box-shadow h-md-250">
       <div class="card-body d-flex flex-column align-items-start">
-        <strong class="d-inline-block mb-2 text-primary">Article by : {{post.author}}</strong>
-        <h3 class="mb-0">
-          <a class="text-dark" href="#">{{post.title}}</a>
-        </h3>
+<h3>
+ {{post.title}}
+</h3>
+       
+
+         <strong class="d-inline-block mb-2 text-primary">Article by : {{post.author}}</strong>
         <div class="mb-1 text-muted">{{post.time}}</div>
-        <p class="card-text mb-auto">{{post.content|truncatechars:200}}</p>
+        <p class="card-text mb-auto"><div class="preview"> {{post.content|safe|truncatechars:150}}</div></p>
         <a href="/blog/{{post.slug}}" role="button" class="btn btn-secondary">Read more</a>
       </div>
       <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
@@ -23,8 +39,13 @@
         data-holder-rendered="true">
     </div>
   </div>
-  {% endfor %}
 
+
+    {% if forloop.counter|divisibleby:2 %}
+  </div><div class="row">
+  {% endif %}
+  {% endfor %}
+    </div>
 </div>
 
 

@@ -6,8 +6,8 @@
 <div class="container my-2">
         <div class="blog-post">
             <h2 class="blog-post-title">{{post.title}}</h2>
-            <p class="blog-post-meta">{{post.time}} by <a href="#"><b>{{post.author}}</b></a></p>
-            <p>{{post.content}}</p>
+            <p class="blog-post-meta">{{post.time}} by <a href="#"><b>{{post.author}}</b></a><span class="badge badge-secondary"> ({{post.views}} views)</span></p>
+            <p>{{post.content|safe}}</p>
         </div>
 
     <div class="">
